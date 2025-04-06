@@ -1,0 +1,7 @@
+# version: '3.8'
+
+services:
+  xdata:
+    container_name: xdata3
+    build: .
+    tty: true
