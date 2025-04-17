@@ -1,3 +1,5 @@
+In this Repo, XXXX-2-BM corresponds to MutBM and XXXX-2 corresponds to AnonM
+
 # View benchmarks used
 - We present results for 3 benchmarks: XData-BM, LargeJoin, TPCH.
 - `/benchamrks/<benchmark-name>` directory contains following files.

@@ -1,5 +1,0 @@
-1|selection|select id, name from student
-1|selection|select id, name from student where tot_cred<30
-1|selection|select id, name from student where tot_cred=30
-1|column|select dept_name, name from student where tot_cred>30
-1|column|select dept_name, tot_cred from student where tot_cred>30
