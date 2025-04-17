@@ -1,0 +1,43 @@
+1|SELECT * FROM (select credits from course where credits > '2' group by dept_name, credits) as foo
+
+
+
+1SELECT COUNT(*) FROM instructor GROUP BY dept_name, id
+1SELECT COUNT(*) FROM instructor GROUP BY dept_name, name, salary
+1SELECT COUNT(*) FROM instructor GROUP BY dept_name, name, id
+1SELECT COUNT(*) FROM instructor GROUP BY name
+1SELECT COUNT(*) FROM instructor GROUP BY dept_name
+1SELECT SUM(*) FROM instructor GROUP BY dept_name, name
+1SELECT COUNT(name) FROM instructor GROUP BY dept_name, name
+1SELECT COUNT(id) FROM instructor GROUP BY dept_name, name
+
+1SELECT COUNT(*) FROM instructor GROUP BY dept_name, name
+
+2SELECT COUNT(*) FROM instructor GROUP BY name
+
+2SELECT COUNT(*) FROM instructor GROUP BY id, name
+2SELECT COUNT(*) FROM instructor GROUP BY id, dept_name
+2SELECT COUNT(*) FROM instructor GROUP BY id, name, dept_name
+2SELECT COUNT(*) FROM instructor GROUP BY id, name, salary
+
+3select count(dept_name) from student group by name, dept_name having count(tot_cred) < 4
+3select count(dept_name) from student group by name, id having count(tot_cred) < 4
+3select count(dept_name) from student group by id having count(tot_credid) < 4
+3select count(dept_name) from student group by name having count(tot_cred) <= 4
+3select count(dept_name,name) from student group by name having count(tot_cred) < 4
+
+3select count(dept_name) from student group by name having count(dept_name) < 4
+3select count(name) from student group by name having count(tot_cred) < 4
+3select count(id) from student group by name having count(tot_cred) < 4
+3select count(id) from student group by name having sum(tot_cred) < 4
+
+4select count(dept_name) from student group by name, dept_name having sum(tot_cred) < 4
+4select count(dept_name) from student group by name, id having sum(tot_cred) < 4
+4select count(dept_name) from student group by id having sum(tot_credid) < 4
+4select count(dept_name) from student group by name having sum(tot_cred) <= 4
+4select count(dept_name,name) from student group by name having sum(tot_cred) < 4
+
+4select count(dept_name) from student group by name having sum(dept_name) < 4
+4select count(name) from student group by name having sum(tot_cred) < 4
+4select count(id) from student group by name having sum(tot_cred) < 4
+4select count(id) from student group by name having count(tot_cred) < 4

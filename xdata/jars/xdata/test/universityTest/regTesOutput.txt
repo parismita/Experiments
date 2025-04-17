@@ -1,0 +1,36 @@
+/home/sunanda/xdata/XData-DataGen/XData/test/universityTest/dataset/uni.sql
+
+Printing stats mutations wise
+Mutants-query pairs failed 54 out of 352
+basic failed 4 out of 83
+exception - unsupported 10 out of 83
+extra_gb, tuplecount: 906, timetaken: 49154, failedcount: 0, mutations killed: 18, noofmutations: 18, datasetcount: 64, noofqueries: 11, basicfail: 1, avgdatasetcount: 6, avgtimetaken: 4469, avgtuplecount: 15, unsupported: 0
+missing_sq, tuplecount: 5629, timetaken: 626686, failedcount: 3, mutations killed: 31, noofmutations: 34, datasetcount: 227, noofqueries: 25, basicfail: 1, avgdatasetcount: 10, avgtimetaken: 25068, avgtuplecount: 25, unsupported: 3
+set, tuplecount: 0, timetaken: 0, failedcount: 12, mutations killed: 0, noofmutations: 12, datasetcount: 0, noofqueries: 6, basicfail: 0, avgdatasetcount: 0, avgtimetaken: 0, avgtuplecount: 0, unsupported: 6
+string, tuplecount: 4010, timetaken: 306496, failedcount: 5, mutations killed: 31, noofmutations: 36, datasetcount: 175, noofqueries: 17, basicfail: 1, avgdatasetcount: 11, avgtimetaken: 18030, avgtuplecount: 23, unsupported: 2
+sq_connective, tuplecount: 10124, timetaken: 967293, failedcount: 1, mutations killed: 46, noofmutations: 47, datasetcount: 362, noofqueries: 28, basicfail: 2, avgdatasetcount: 13, avgtimetaken: 34547, avgtuplecount: 28, unsupported: 0
+column, tuplecount: 19, timetaken: 1783, failedcount: 0, mutations killed: 4, noofmutations: 4, datasetcount: 8, noofqueries: 2, basicfail: 0, avgdatasetcount: 4, avgtimetaken: 892, avgtuplecount: 3, unsupported: 0
+distinct, tuplecount: 185, timetaken: 14772, failedcount: 1, mutations killed: 6, noofmutations: 7, datasetcount: 14, noofqueries: 3, basicfail: 0, avgdatasetcount: 5, avgtimetaken: 4924, avgtuplecount: 14, unsupported: 0
+aggregate, tuplecount: 1489, timetaken: 115471, failedcount: 2, mutations killed: 34, noofmutations: 36, datasetcount: 104, noofqueries: 15, basicfail: 1, avgdatasetcount: 7, avgtimetaken: 7699, avgtuplecount: 15, unsupported: 0
+exist, tuplecount: 1479, timetaken: 181958, failedcount: 0, mutations killed: 3, noofmutations: 3, datasetcount: 49, noofqueries: 3, basicfail: 1, avgdatasetcount: 17, avgtimetaken: 60653, avgtuplecount: 31, unsupported: 0
+cast, tuplecount: 10, timetaken: 2634, failedcount: 1, mutations killed: 0, noofmutations: 1, datasetcount: 1, noofqueries: 1, basicfail: 0, avgdatasetcount: 1, avgtimetaken: 2634, avgtuplecount: 10, unsupported: 0
+selection, tuplecount: 4350, timetaken: 418012, failedcount: 9, mutations killed: 49, noofmutations: 58, datasetcount: 178, noofqueries: 22, basicfail: 0, avgdatasetcount: 9, avgtimetaken: 19001, avgtuplecount: 25, unsupported: 3
+null, tuplecount: 6, timetaken: 1261, failedcount: 0, mutations killed: 4, noofmutations: 4, datasetcount: 2, noofqueries: 2, basicfail: 0, avgdatasetcount: 1, avgtimetaken: 631, avgtuplecount: 3, unsupported: 0
+const_aggr, tuplecount: 586, timetaken: 65723, failedcount: 1, mutations killed: 9, noofmutations: 10, datasetcount: 41, noofqueries: 4, basicfail: 0, avgdatasetcount: 11, avgtimetaken: 16431, avgtuplecount: 15, unsupported: 0
+join, tuplecount: 9781, timetaken: 860924, failedcount: 5, mutations killed: 60, noofmutations: 65, datasetcount: 349, noofqueries: 30, basicfail: 3, avgdatasetcount: 12, avgtimetaken: 28698, avgtuplecount: 29, unsupported: 2
+case, tuplecount: 3, timetaken: 955, failedcount: 2, mutations killed: 2, noofmutations: 4, datasetcount: 1, noofqueries: 1, basicfail: 0, avgdatasetcount: 1, avgtimetaken: 955, avgtuplecount: 3, unsupported: 0
+order, tuplecount: 155, timetaken: 23879, failedcount: 12, mutations killed: 1, noofmutations: 13, datasetcount: 15, noofqueries: 3, basicfail: 0, avgdatasetcount: 5, avgtimetaken: 7960, avgtuplecount: 11, unsupported: 0
+
+Printing stats original query wise
+Mutants-query pairs failed 54 out of 352
+basic failed 4 out of 83
+exception - unsupported 10 out of 83
+
+single, tuplecount: 1432, timetaken: 66736, failedcount: 3, mutations killed: 109, noofmutations: 112, datasetcount: 128, noofqueries: 24, basicfail: 0, avgdatasetcount: 6, avgtimetaken: 2781, avgtuplecount: 12, unsupported: 0
+set, tuplecount: 0, timetaken: 0, failedcount: 12, mutations killed: 0, noofmutations: 12, datasetcount: 0, noofqueries: 6, basicfail: 0, avgdatasetcount: 0, avgtimetaken: 0, avgtuplecount: 0, unsupported: 6
+wherec, tuplecount: 8893, timetaken: 898713, failedcount: 12, mutations killed: 111, noofmutations: 123, datasetcount: 323, noofqueries: 25, basicfail: 3, avgdatasetcount: 13, avgtimetaken: 35949, avgtuplecount: 28, unsupported: 1
+from, tuplecount: 1211, timetaken: 100971, failedcount: 7, mutations killed: 41, noofmutations: 48, datasetcount: 72, noofqueries: 13, basicfail: 1, avgdatasetcount: 6, avgtimetaken: 7767, avgtuplecount: 17, unsupported: 2
+inwos, tuplecount: 20, timetaken: 5944, failedcount: 5, mutations killed: 1, noofmutations: 6, datasetcount: 2, noofqueries: 3, basicfail: 0, avgdatasetcount: 1, avgtimetaken: 1982, avgtuplecount: 10, unsupported: 1
+wherenc, tuplecount: 3441, timetaken: 275295, failedcount: 0, mutations killed: 33, noofmutations: 33, datasetcount: 109, noofqueries: 7, basicfail: 0, avgdatasetcount: 16, avgtimetaken: 39328, avgtuplecount: 32, unsupported: 0
+order, tuplecount: 168, timetaken: 27468, failedcount: 15, mutations killed: 3, noofmutations: 18, datasetcount: 17, noofqueries: 5, basicfail: 0, avgdatasetcount: 4, avgtimetaken: 5494, avgtuplecount: 10, unsupported: 0
+

@@ -1,0 +1,5 @@
+1|SELECT SUM(credits) FROM course INNER JOIN instructor USING (dept_name) WHERE credits <= 4 GROUP BY name 
+2|SELECT SUM(capacity) FROM classroom GROUP BY building, room_number 
+3|SELECT SUM(capacity) FROM classroom GROUP BY room_number 
+4|SELECT SUM(capacity) FROM classroom GROUP BY room_number having sum(capacity) > 100
+5|SELECT DISTINCT dept_name FROM instructor

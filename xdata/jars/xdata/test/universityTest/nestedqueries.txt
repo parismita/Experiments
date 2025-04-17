@@ -1,0 +1,9 @@
+61|SELECT name FROM instructor WHERE EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+62|SELECT name FROM instructor WHERE EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID and t1.year=2010 and EXISTS (select * from teaches t2 where instructor.ID =t2.ID)) AND instructor.ID='1'
+63|SELECT name FROM instructor WHERE EXISTS (SELECT * FROM teaches t1 natural join section WHERE t1.year=2010 and EXISTS (SELECT * FROM section WHERE semester = 'Spring' and year = 2010))
+64|SELECT name FROM instructor natural join department WHERE EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2011 ))
+65|SELECT name FROM instructor natural join department WHERE NOT EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2011 ))
+66|SELECT name FROM instructor natural join department WHERE NOT EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2011 ))
+67|SELECT * FROM instructor WHERE EXISTS (SELECT * FROM teaches t1 WHERE EXISTS (select * from teaches t2 where t2.ID=t1.ID ))
+68|SELECT name FROM instructor natural join student natural join department WHERE EXISTS (SELECT * FROM teaches t1 WHERE instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2011 ))
+69|SELECT name FROM instructor WHERE EXISTS (SELECT * FROM teaches t1 WHERE instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.year=2010 and t1.ID = t2.ID ))

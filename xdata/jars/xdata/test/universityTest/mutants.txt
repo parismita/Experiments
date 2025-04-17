@@ -1,0 +1,489 @@
+1|selection|select id, name from student
+1|selection|select id, name from student where tot_cred<30
+1|selection|select id, name from student where tot_cred=30
+1|column|select dept_name, name from student where tot_cred>30
+1|column|select dept_name, tot_cred from student where tot_cred>30
+
+
+2|selection|select dept_name,budget from department where budget=20000
+2|selection|select dept_name,budget from department where budget>80000
+2|selection|select dept_name,budget from department where budget<40000
+2|selection|select dept_name,budget from department where budget=80000
+2|selection|select dept_name,budget from department where budget>40000 and budget=80000
+2|selection|select dept_name,budget from department where budget=40000 and budget<80000
+
+2|selection|select dept_name,budget from department where budget>40000
+2|selection|select dept_name,budget from department where budget<80000
+2|column|select building,budget from department where budget>40000 and budget<80000
+2|column|select dept_name from department where budget>40000 and budget<80000
+
+
+3|selection|select building from classroom where capacity < 10 or capacity > 5
+3|selection|select building from classroom where capacity > 10 
+3|selection|select building from classroom where capacity > 10 
+3|selection|select building from classroom where  capacity < 5
+3|selection|select building FROM classroom  where ((capacity>10) AND (capacity<5))
+3|selection|select building FROM classroom  where ((capacity=10) AND (capacity<5))
+3|selection|select building FROM classroom  where ((capacity<10) AND (capacity<5))
+3|selection|select building FROM classroom  where ((capacity>10) AND (capacity=5))
+3|selection|select building FROM classroom  where ((capacity>10) AND (capacity>5))
+
+4|selection|select id from instructor where salary<70000 and dept_name = 'cs'
+4|selection|select id from instructor where salary>70000 or dept_name = 'cs'
+4|selection|select id from instructor where dept_name = 'cs'
+4|string|select id from instructor where salary>70000
+4|string|select id from instructor where salary>70000 and dept_name > 'cs'
+4|string|select id from instructor where salary>70000 and dept_name < 'cs'
+
+
+
+5|join|select * from instructor, department where instructor.dept_name != department.dept_name
+5|join|select * from instructor, department where instructor.dept_name > department.dept_name
+5|join|select * from instructor, department where instructor.dept_name < department.dept_name
+5|join|select * from instructor, department 
+
+6|join|select name,course_id from instructor,teaches where instructor.ID != teaches.ID
+6|join|select name,course_id from instructor,teaches where instructor.ID > teaches.ID
+6|join|select name,course_id from instructor,teaches where instructor.ID < teaches.ID
+6|join|select name,course_id from instructor,teaches 
+
+7|join|select * from student join takes on student.ID != takes.ID
+7|join|select * from student join takes on student.ID > takes.ID
+7|join|select * from student join takes on student.ID < takes.ID
+7|join|select * from student, takes 
+
+8|join|select takes.course_id FROM student INNER JOIN takes ON(student.id>takes.id) INNER JOIN course ON(course.course_id=takes.course_id) where student.id = '12345'
+8|join|select takes.course_id FROM student INNER JOIN takes ON(student.id!=takes.id) INNER JOIN course ON(course.course_id=takes.course_id) where student.id = '12345'
+8|join|select takes.course_id FROM student INNER JOIN takes ON(student.id<takes.id) INNER JOIN course ON(course.course_id=takes.course_id) where student.id = '12345'
+8|join|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) INNER JOIN course ON(course.course_id!=takes.course_id) where student.id = '12345'
+8|join|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) INNER JOIN course ON(course.course_id<=takes.course_id) where student.id = '12345'
+8|string|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) INNER JOIN course ON(course.course_id=takes.course_id) where student.id != '12345'
+8|string|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) INNER JOIN course ON(course.course_id=takes.course_id) where student.id = '1345'
+8|string|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) INNER JOIN course ON(course.course_id=takes.course_id) where student.id > '12345'
+8|string|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) INNER JOIN course ON(course.course_id=takes.course_id) where student.id < '12345'
+8|join|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) LEFT OUTER JOIN course ON(course.course_id=takes.course_id) where student.id = '12345'
+8|join|select takes.course_id FROM student INNER JOIN takes ON(student.id=takes.id) RIGHT OUTER JOIN course ON(course.course_id=takes.course_id) where student.id = '12345'
+
+
+9|join|select name, title from instructor natural join teaches, course
+9|join|select name from instructor natural join teaches
+
+10|aggregate|select sum(salary) from instructor where dept_name = 'Comp. Sci.'
+10|aggregate|select max(salary) from instructor where dept_name = 'Comp. Sci.'
+10|aggregate|select count(salary) from instructor where dept_name = 'Comp. Sci.'
+10|aggregate|select avg(salary) from instructor where dept_name = 'Comp. Sci.'
+10|string|select min(salary) from instructor where dept_name != 'Comp. Sci.'
+
+11|aggregate|select min(salary) from instructor where dept_name = 'Comp. Sci.'
+11|aggregate|select sum(salary) from instructor where dept_name = 'Comp. Sci.'
+11|aggregate|select count(salary) from instructor where dept_name = 'Comp. Sci.'
+11|string|select max(salary) from instructor where dept_name = 'ECE'
+
+
+12|aggregate|select count(salary) from instructor where dept_name = 'Comp. Sci.'
+13|aggregate|select sum(salary) from instructor where dept_name = 'Comp. Sci.'
+
+
+14|aggregate|select dept_name, avg(tot_cred) from student group by dept_name
+14|aggregate|select dept_name, sum(tot_cred) from student group by dept_name
+14|aggregate|select dept_name, count(dept_name) from student group by dept_name
+14|aggregate|select dept_name from student group by dept_name
+14|extra_gb|select dept_name, count(dept_name) from student group by dept_name,name
+14|extra_gb|select dept_name, count(id) from student group by dept_name,name
+14|aggregate|select count(dept_name) from student group by name
+
+
+15|extra_gb|select  count(DISTINCT name) from student 
+15|extra_gb|select  count(DISTINCT name) from student group by name
+15|aggregate|select  count(name) from student group by dept_name
+
+16|aggregate|select name, min(salary) from instructor group by name
+16|aggregate|select name, max(salary) from instructor group by name
+16|aggregate|select name, count(salary) from instructor group by name
+16|aggregate|select name, sum(salary) from instructor group by name
+16|aggregate|select name, count(id) from instructor group by name
+16|aggregate|select name from instructor group by name
+16|extra_gb|select id, min(salary) from instructor group by id
+16|extra_gb|select name, min(salary) from instructor group by name, id
+16|extra_gb|select name, min(salary) from instructor group by name, salary
+
+
+
+17 group select COUNT(*) FROM instructor GROUP BY id, dept_name -- equivalent
+17 group select COUNT(*) FROM instructor GROUP BY id -- equivalent
+17|extra_gb|select COUNT(*) FROM instructor GROUP BY name
+17|join|select SUM(salary) FROM instructor GROUP BY id, name
+
+18|join|select ID, count(s_id) from instructor left outer join advisor on (instructor.ID < advisor.i_id) group by ID
+18|join|select ID, count(s_id) from instructor left outer join advisor on (instructor.ID > advisor.i_id) group by ID
+18|join|select ID, count(s_id) from instructor left outer join advisor on (instructor.ID != advisor.i_id) group by ID
+18|join|select ID, count(s_id) from instructor right outer join advisor on (instructor.ID = advisor.i_id) group by ID
+18|join|select ID, count(s_id) from instructor inner join advisor on (instructor.ID = advisor.i_id) group by ID
+18|join|select ID, count(salary) from instructor inner join advisor on (instructor.ID = advisor.i_id) group by ID
+18|extra_gb|select name, count(s_id) from instructor inner join advisor on (instructor.ID = advisor.i_id) group by name
+
+19|const_aggr|select count(dept_name) from student group by name having count(id) != 5
+19|const_aggr|select count(dept_name) from student group by name having count(id) = 5
+19|const_aggr|select count(dept_name) from student group by name having count(id) > 5
+19|extra_gb|select count(dept_name) from student group by name,id having count(id) < 5
+
+
+20|const_aggr|select dept_name, SUM(credits) FROM course INNER JOIN department USING (dept_name) where credits >= 4 GROUP BY dept_name HAVING SUM(credits) > 25 
+20|const_aggr|select dept_name, SUM(credits) FROM course INNER JOIN department USING (dept_name) where credits >= 4 GROUP BY dept_name HAVING SUM(credits) = 25 
+20|aggregate|select dept_name, COUNT(credits) FROM course INNER JOIN department USING (dept_name) where credits >= 4 GROUP BY dept_name HAVING SUM(credits) = 25 
+
+
+21|distinct|select dept_name FROM instructor 
+21|distinct|select DISTINCT name FROM instructor 
+21|distinct|select DISTINCT id FROM instructor 
+
+22|distinct|select s.id, s.name from student s, takes t where s.id = t.id and  t.grade != 'F' 
+22|distinct|select distinct s.id, s.dept_name from student s, takes t where s.id = t.id 
+22|distinct|select distinct s.name, s.dept_name from student s, takes t where s.id = t.id 
+22|string|select distinct s.id, s.name from student s, takes t where s.id = t.id 
+
+23|null|select name from instructor where salary is not null
+23|null|select dept_name from instructor where salary is null
+
+24|null|select name from instructor where salary is null
+24|null|select dept_name from instructor where salary is not null
+
+=========================Queries with Subqueries==========================
+=========================From Clause Subqueries==========================
+
+25|missing_sq|select course.course_id, d.dept_name  FROM course ;
+
+25|join|select course.course_id, d.dept_name FROM course, (select * from department where department.budget < 70000) d 
+25|selection|select course.course_id, d.dept_name FROM course LEFT OUTER JOIN (select * from department where department.budget < 70000) d USING (dept_name)
+25|selection|select course.course_id, d.dept_name FROM course LEFT OUTER JOIN (select * from department where department.budget = 70000) d USING (dept_name)
+
+
+26|join|select q1.ID from (select * from student where dept_name = 'Comp.Sci') AS q1 left outer join (select * from takes where semester = 'Spring' and year = 2009) AS q2 on q1.ID = q2.ID
+26|string|select T1.ID from (select * from student where dept_name != 'Comp.Sci') as T1 natural full outer join (select * from takes where semester = 'Spring' and year != 2009) as T2
+
+27|join|select foo.name FROM (select * FROM student join takes on (student.ID > takes.ID)) as foo
+27|join|select foo.name FROM (select * FROM student join takes on (student.ID < takes.ID)) as foo
+27|missing_sq|select foo.name FROM (select * FROM student) as foo
+27|missing_sq|SELECT foo.name FROM student, takes ;
+
+28|join|select foo.name FROM (select * FROM student join takes on (student.ID != takes.ID)) as foo, (select * FROM student join takes on (student.ID = takes.ID)) as too 
+28|missing_sq|select too.name FROM (select * FROM student join takes on (student.ID > takes.ID)) as too 
+28|missing_sq|select foo.name FROM (select * FROM student join takes on (student.ID != takes.ID)) as foo
+28|join|select foo.name FROM (select * FROM student, takes ) as foo, (select * FROM student join takes on (student.ID = takes.ID)) as too 
+; add distinct mutation in subqueries
+
+
+29|aggregate|select * FROM (select credits, avg(credits) from course where credits > '2' group by dept_name, credits) as foo
+29|aggregate|select * FROM (select credits, count(credits) from course where credits > '2' group by dept_name, credits) as foo
+29|aggregate|select * FROM (select credits, min(credits) from course where credits > '2' group by dept_name, credits) as foo
+29|aggregate|select * FROM (select credits, max(credits) from course where credits > '2' group by dept_name, credits) as foo
+29|selection|select * FROM (select credits, sum(credits) from course where credits < '2' group by dept_name, credits) as foo
+29|selection|select * FROM (select credits, sum(credits) from course where credits = '2' group by dept_name, credits) as foo
+29|selection|select * FROM (select credits, sum(credits) from course  group by dept_name, credits) as foo
+29|extra_gb|select * FROM (select dept_name, sum(credits) from course where credits > '2' group by dept_name) as foo
+29|extra_gb|select * FROM (select credits, sum(credits) from course where credits > '2' group by  credits) as foo
+
+30|distinct|SELECT * FROM (select credits from course where credits > '2' ) as foo
+30|selection|SELECT * FROM (select distinct credits from course ) as foo
+30|selection|SELECT * FROM (select distinct credits from course where credits < '2' ) as foo
+30|selection|SELECT * FROM (select distinct credits from course where credits = '2' ) as foo
+
+79|extra_gb|select foo.dept_name FROM (select dept_name, count(*) from course where credits > '2' group by dept_name) as foo
+
+31|aggregate|select foo.credits FROM (select credits from course where credits > '2' group by dept_name, credits) as foo
+31|extra_gb|select foo.dept_name FROM (select dept_name, count(*) from course where credits > '2' group by dept_name) as foo
+
+32|selection|select * FROM (select sum(credits), count(credits) from course where credits = '2' group by dept_name, credits) as foo
+32|selection|select * FROM (select sum(credits), count(credits) from course where credits < '2' group by dept_name, credits) as foo
+32|aggregate|select * FROM (select sum(credits), avg(credits) from course where credits > '2' group by dept_name, credits) as foo
+32|extra_gb|select * FROM (select sum(credits), avg(credits) from course where credits > '2' group by dept_name) as foo
+32|extra_gb|select * FROM (select sum(credits), count(credits) from course where credits > '2' group by dept_name) as foo
+
+33|extra_gb|select * FROM (select course.dept_name, sum(credits) from course, department where (course.dept_name = department.dept_name) group by course.dept_name) as foo
+33|join|select * FROM (select course.dept_name, sum(credits) from course, department where (course.dept_name != department.dept_name) group by course.dept_name, credits) as foo
+33|extra_gb|select * FROM (select credits, sum(credits) from course, department where (course.dept_name != department.dept_name) group by  credits) as foo
+
+
+34|const_aggr|select * FROM (select dept_name, count(credits) from course where credits > '2' group by dept_name having sum(credits)<3) as foo
+34|const_aggr|select * FROM (select dept_name, count(credits) from course where credits > '2' group by dept_name having sum(credits)=3) as foo
+34|selection|select * FROM (select dept_name, count(credits) from course where credits = '2' group by dept_name having sum(credits)>3) as foo
+34|selection|select * FROM (select dept_name, sum(credits) from course where credits > '2' group by dept_name having sum(credits)>3) as foo
+34|aggregate|SELECT * FROM (select credits, count(credits) from course where credits > '2' group by dept_name,credits having sum(credits)>3) as foo
+missing from clause subquery
+
+35|missing_sq|select * FROM student;
+
+
+36|join|select foo.name FROM (select * FROM  (select * FROM  student join takes on (student.ID != takes.ID)) as foo ) as foo
+36|missing_sq|select foo.name FROM (select * FROM  student ) as foo
+36|join|select foo.name FROM (select * FROM  (select * FROM  student join takes on (student.ID > takes.ID)) as foo ) as foo
+36|join|select foo.name FROM (select * FROM  (select * FROM  student join takes on (student.ID < takes.ID)) as foo ) as foo
+=========================where Clause Subqueries==========================
+
+=========================Scalar Subqueries==========================
+37|sq_connective|select course_id FROM course where credits != (select MIN(credits) FROM course where dept_name = 'CS')
+37|sq_connective|select course_id FROM course where credits > (select MIN(credits) FROM course where dept_name = 'CS')
+37|sq_connective|select course_id FROM course where credits < (select MIN(credits) FROM course where dept_name = 'CS')
+37|aggregate|select course_id FROM course where credits = (select MAX(credits) FROM course where dept_name = 'CS')
+37|aggregate|select course_id FROM course where credits > (select MIN(credits) FROM course where dept_name = 'CS')
+37|aggregate|select course_id FROM course where credits > (select credits FROM course where dept_name = 'CS')
+37|missing_sq|select course_id FROM course ;
+
+38|missing_sq|select count(room_number) from classroom 
+38|sq_connective|select count(room_number) from classroom where NOT  EXISTS (select d.building from department as d where dept_name='Comp. Sci.')
+38|string|select count(room_number) from classroom where  building = (select d.building from department as d where dept_name!='Comp. Sci.')
+38|string|select count(room_number) from classroom where  building = (select d.building from department as d where dept_name<'Comp. Sci.')
+38|string|select count(room_number) from classroom where  building = (select d.building from department as d where dept_name>'Comp. Sci.')
+38|sq_connective|select count(room_number) from classroom where  building > (select d.building from department as d where dept_name='Comp. Sci.')
+38|sq_connective|select count(room_number) from classroom where  building < (select d.building from department as d where dept_name='Comp. Sci.')
+38|sq_connective|select count(room_number) from classroom where  building != (select d.building from department as d where dept_name='Comp. Sci.')
+
+39|selection|select dept_name from department where budget = (select min(budget) from department) and budget = 10
+39|selection|select dept_name from department where budget = (select max(budget) from department) 
+39|missing_sq|select dept_name from department where budget = 10
+
+
+=========================EXIST and NOT EXISTS CONNECTIVE==========================
+
+=========================EXIST Without Correlation: 1 level==========================
+40|selection|select name FROM instructor where EXISTS (select * FROM teaches where year!=2009)
+40|selection|select name FROM instructor where EXISTS (select * FROM teaches where year>2009)
+40|selection|select name FROM instructor where EXISTS (select * FROM teaches where year<2009)
+40|selection|select name FROM instructor where EXISTS (select * FROM teaches)
+40|missing_sq|select name FROM instructor ;
+40|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches where year=2009)
+
+=========================NOT EXIST Without Correlation: 1 level==========================
+41|selection|select name FROM instructor where NOT EXISTS (select * FROM teaches where year!=2009)
+41|missing_sq|select name FROM instructor ;
+41|selection|select name FROM instructor where NOT EXISTS (select * FROM teaches)
+41|sq_connective|select name FROM instructor where EXISTS (select * FROM teaches where year=2009)
+41|selection|select name FROM instructor where NOT EXISTS (select * FROM teaches where year<2009)
+41|selection|select name FROM instructor where NOT EXISTS (select * FROM teaches where year>2009)
+
+=========================EXIST with Correlation: 1 level==========================
+42|sq_connective|select name FROM instructor where NOT EXISTS (SELECT * FROM department WHERE instructor.dept_name = department.dept_name)
+42|join|select name FROM instructor where EXISTS (SELECT * FROM department WHERE instructor.dept_name != department.dept_name)
+42|join|select name FROM instructor where EXISTS (SELECT * FROM department WHERE instructor.dept_name > department.dept_name)
+42|join|select name FROM instructor where EXISTS (SELECT * FROM department WHERE instructor.dept_name < department.dept_name)
+42 exist select name FROM instructor 
+42|missing_sq|select name FROM instructor where EXISTS (select * FROM teaches )
+42|selection|select name FROM instructor where EXISTS (SELECT * FROM department WHERE instructor.dept_name = department.dept_name and salary = 10000)
+
+=========================NOT EXIST with Correlation: 1 level==========================
+43|join|select name FROM instructor where NOT EXISTS (SELECT * FROM department WHERE instructor.dept_name != department.dept_name)
+43|join|select name FROM instructor where NOT EXISTS (SELECT * FROM department WHERE instructor.dept_name > department.dept_name)
+43|join|select name FROM instructor where NOT EXISTS (SELECT * FROM department WHERE instructor.dept_name < department.dept_name)
+43|sq_connective|select name FROM instructor where EXISTS (SELECT * FROM department WHERE instructor.dept_name = department.dept_name)
+43|missing_sq|select name FROM instructor
+43|missing_sq|select name FROM instructor where NOT EXISTS (select * FROM teaches )
+43|selection|select name FROM instructor where NOT EXISTS (SELECT * FROM department WHERE instructor.dept_name = department.dept_name and salary = 10000)
+
+
+
+44|join|select name FROM instructor where EXISTS (select * FROM teaches where instructor.ID = teaches.ID and teaches.semester='Spring')
+44|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches natural join instructor where instructor.ID = teaches.ID and teaches.semester='Spring')
+44|missing_sq|select name FROM instructor ;
+44 exist select name FROM instructor where EXISTS (select * FROM teaches natural join instructor where  teaches.semester='Spring') -- equivalent
+44|string|select name FROM instructor where EXISTS (select * FROM teaches natural join instructor where instructor.ID = teaches.ID and teaches.semester>'Spring')
+44|string|select name FROM instructor where EXISTS (select * FROM teaches natural join instructor where instructor.ID = teaches.ID and teaches.semester<'Spring')
+44|string|select name FROM instructor where EXISTS (select * FROM teaches natural join instructor where instructor.ID = teaches.ID and teaches.semester!='Spring')
+
+45|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010))
+45|sq_connective|select name FROM instructor where EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010))
+45|missing_sq|select name FROM instructor where EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID )
+45|join|select name FROM instructor where EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.year=2010))
+45 exist select name FROM instructor where EXISTS (select * FROM teaches t1 where EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010))
+45|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 where EXISTS (select * from teaches t2 where  t2.year=2010))
+45 exist select name FROM instructor where EXISTS (select * from teaches t2 where t2.ID=instructor.ID and t2.year=2010)
+45|missing_sq|select name FROM instructor where NOT EXISTS (select * from teaches t2 where t2.ID=instructor.ID and t2.year=2010)
+
+46|sq_connective|select name FROM instructor where EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and EXISTS (select * FROM teaches t2 where t2.ID=t1.ID and t2.year=2010))
+46|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and NOT EXISTS (select * FROM teaches t2 where t2.ID=t1.ID and t2.year=2010))
+46|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and EXISTS (select * FROM teaches t2 where t2.ID=t1.ID and t2.year=2010))
+
+47|join|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+47|string|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year>2009 ))
+47|string|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year!=2010 ))
+47|string|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year<2009 ))
+47|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 natural join section where EXISTS (select * from teaches t2 where t2.year=2010 ))
+47|sq_connective|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+
+
+48|join|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section where t1.year=2010 and EXISTS (select * from teaches t2 where instructor.ID =t2.ID and t2.year=2010))
+48|join|select name FROM instructor, (select * FROM teaches t1 natural join section where t1.year=2010 and EXISTS (select * from teaches t2 where instructor.ID =t2.ID and t2.year=2010)) as foo where instructor.ID='1'
+48|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 natural join section where t1.year=2010 and EXISTS (select * from teaches t2)) AND instructor.ID='1'
+48|sq_connective|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section where t1.year=2010 and NOT EXISTS (select * from teaches t2 where instructor.ID =t2.ID)) AND instructor.ID='1'
+
+49|string|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section where t1.year=2010 and EXISTS (select * FROM section where year = 2010))
+49|sq_connective|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section s1 where t1.year=2010 and NOT EXISTS (select * FROM section s2 where semester = 'Spring' and s1.year = s2.year and year = 2010))
+49|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 natural join section s1 where t1.year=2010 and EXISTS (select * FROM section s2 where semester = 'Spring' and s1.year = s2.year and year = 2010))
+49|selection|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section s1 where t1.year=2010 and EXISTS (select * FROM section s2 where s2.semester = 'Spring' and s1.year = s2.year and year > 2010))
+49|selection|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section s1 where t1.year=2010 and EXISTS (select * FROM section s2 where s2.semester = 'Spring' and s1.year = s2.year and year < 2010))
+49|selection|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join section s1 where t1.year=2010 and EXISTS (select * FROM section s2 where s2.semester = 'Spring' and s1.year = s2.year and year != 2010))
+
+50|selection|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2009 ))
+50|selection|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID ))
+50|sq_connective|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+50|sq_connective|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+50|join|SELECT name FROM instructor natural join department WHERE EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.year=2010 ))
+50|join|SELECT name FROM instructor natural join department WHERE EXISTS (SELECT * FROM teaches t1 natural join section WHERE NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+
+51|sq_connective|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+51|join|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+51|join|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.year=2010 ))
+51|missing_sq|SELECT name FROM instructor natural join department WHERE NOT EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID)
+51|missing_sq|SELECT name FROM instructor natural join department WHERE EXISTS (select * from teaches t2 where t2.ID=instructor.ID and t2.year=2010 )
+
+52|selection|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID ))
+52|sq_connective|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+52|sq_connective|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+52|join|SELECT name FROM instructor natural join department WHERE NOT EXISTS (SELECT * FROM teaches t1 natural join section WHERE NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+52|join|SELECT name FROM instructor natural join department WHERE NOT EXISTS (SELECT * FROM teaches t1 natural join section WHERE instructor.ID = t1.ID and NOT EXISTS (select * from teaches t2 where t2.year=2010 ))
+
+53|sq_connective|select * FROM instructor where NOT EXISTS (select * FROM teaches t1 where EXISTS (select * from teaches t2 where t2.ID=t1.ID ))
+53|sq_connective|select * FROM instructor where EXISTS (select * FROM teaches t1 where NOT EXISTS (select * from teaches t2 where t2.ID=t1.ID ))
+53|sq_connective|select * FROM instructor where NOT EXISTS (select * FROM teaches t1 where NOT EXISTS (select * from teaches t2 where t2.ID!=t1.ID ))
+
+54|selection|select name FROM instructor natural join student natural join department where EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and t1.semester='Spring' and EXISTS (select * from teaches t2 where t2.ID=t1.ID ))
+54|sq_connective|select name FROM instructor natural join student natural join department where NOT EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and t1.semester='Spring' and EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+54|missing_sq|select name FROM instructor natural join student where EXISTS (select * FROM teaches t1 where EXISTS (select * from teaches t2 where t2.ID=t1.ID and t2.year=2010 ))
+54|missing_sq|SELECT name FROM instructor natural join student natural join department WHERE EXISTS (SELECT * FROM teaches t1 WHERE instructor.ID = t1.ID and t1.semester='Spring')
+54|missing_sq|SELECT name FROM instructor natural join student natural join department WHERE  EXISTS (select * from teaches t2 where t2.ID=instructor.ID and t2.year=2010 )
+
+55|join|select name FROM instructor where EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and EXISTS (select * from teaches t2 ))
+55|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 where instructor.ID = t1.ID and EXISTS (select * from teaches t2 where t2.year=2010 and t1.ID = t2.ID ))
+55|missing_sq|SELECT name FROM instructor WHERE EXISTS (SELECT * FROM teaches t1 WHERE instructor.ID = t1.ID)
+55|missing_sq|SELECT name FROM instructor WHERE  EXISTS (select * from teaches t2 where t2.year=2010 )
+
+56|join|select dept_name FROM teaches natural join department where EXISTS (select * FROM teaches t1 natural join section where t1.ID = '10101' and  NOT EXISTS (select * from teaches t2 where  t2.year=2010 ))
+56|missing_sq|SELECT dept_name FROM instructor natural join department WHERE EXISTS (SELECT * FROM teaches t1 natural join section WHERE t1.ID = '10101' )
+
+57|join|select name FROM teaches natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where t1.ID = '10101'  and EXISTS (select * from teaches t2 where t2.year=2010 ))
+57|sq_connective|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where t1.ID = '10101'  and EXISTS (select * from teaches t2 where t2.year=2010 ))
+57|sq_connective|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where t1.ID = '10101'  and NOT EXISTS (select * from teaches t2 where t2.year=2010 ))
+57|sq_connective|select name FROM instructor natural join department where EXISTS (select * FROM teaches t1 natural join section where t1.ID = '10101'  and NOT EXISTS (select * from teaches t2 where t2.year=2010 ))
+
+58|selection|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where t1.ID = '10101' and NOT EXISTS (select * from teaches t2 where  t2.year>2010 ))
+58|string|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where t1.ID < '10101' and NOT EXISTS (select * from teaches t2 where  t2.year=2010 ))
+58|string|select name FROM instructor natural join department where NOT EXISTS (select * FROM teaches t1 natural join section where t1.ID != '10101' and NOT EXISTS (select * from teaches t2 where  t2.year=2010 ))
+
+
+
+59|join|select name FROM instructor, course where EXISTS (select * FROM teaches t1  natural join student where t1.ID = instructor.ID and t1.course_id=course.course_id and t1.year=2010 and EXISTS (select * from student t2 where course.dept_name =t2.dept_name)) AND instructor.ID='1'
+59|join|select name FROM instructor,  course where EXISTS (select * FROM teaches t1  natural join student where t1.ID = instructor.ID and t1.course_id=course.course_id and t1.year=2010 and NOT EXISTS (select * from student t2 where course.dept_name >t2.dept_name)) AND instructor.ID='1'
+59|sq_connective|select name FROM instructor , course where NOT EXISTS (select * FROM teaches t1  natural join student where t1.ID = instructor.ID and t1.course_id=course.course_id and t1.year=2010 and EXISTS (select * from student t2 where course.dept_name >t2.dept_name)) AND instructor.ID='1'
+59|string|select name FROM instructor, course where EXISTS (select * FROM teaches t1  natural join student where t1.ID = instructor.ID and t1.course_id=course.course_id and t1.year=2010 and EXISTS (select * from teaches t2 where course.dept_name >t2.dept_name))
+59|missing_sq|SELECT name FROM instructor, course WHERE EXISTS (SELECT * FROM teaches t1  natural join student WHERE t1.ID = instructor.ID and t1.course_id=course.course_id and t1.year=2010) AND instructor.ID='1'
+59|missing_sq|SELECT name FROM instructor, course WHERE  EXISTS (select * from student t2 where course.dept_name >t2.dept_name) AND instructor.ID='1'
+
+
+60|sq_connective|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join student where instructor.ID = t1.ID and t1.course_id=course.course_id and t1.year=2010 and NOT EXISTS (select * from student t2 where course.dept_name <t2.dept_name)) AND instructor.ID='1'
+60|join|select name FROM instructor where EXISTS (select * FROM teaches t1 natural join student where instructor.ID = t1.ID and t1.course_id=course.course_id and t1.year=2010 and EXISTS (select * from student t2 where course.dept_name =t2.dept_name)) AND instructor.ID='1'
+60|sq_connective|select name FROM instructor where NOT EXISTS (select * FROM teaches t1 natural join student where instructor.ID = t1.ID and t1.course_id=course.course_id and t1.year=2010 and NOT EXISTS (select * from student t2 where course.dept_name < t2.dept_name)) AND instructor.ID='1'
+
+
+61|join|select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name group by credits))
+61|join|select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name and student.dept_name>course.dept_name group by credits))
+61|sq_connective|select * FROM instructor where EXISTS (select * FROM student where NOT EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name and student.dept_name=course.dept_name group by credits))
+61 exist select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name and student.dept_name=course.dept_name group by credits, building))
+61 exist select * FROM instructor where EXISTS (select * FROM student where EXISTS (select count(credits) from course, department where course.dept_name = department.dept_name and student.dept_name=course.dept_name group by credits))
+
+
+62|join|select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name and student.dept_name=course.dept_name group by credits))
+62|join|select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name group by credits))
+62 exist select * FROM instructor where EXISTS (select * FROM student where EXISTS (select count(credits) from course, department where course.dept_name = department.dept_name and student.dept_name>course.dept_name group by credits))
+62 exist select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name and student.dept_name>course.dept_name group by credits, building))
+
+63 exist select * FROM instructor where EXISTS (select * FROM student where EXISTS (select count(credits) from course, department where course.dept_name = department.dept_name group by credits))
+63 exist select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name group by credits, building))
+63|sq_connective|select * FROM instructor where NOT EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name group by credits))
+63|join|select * FROM instructor where EXISTS (select * FROM student where EXISTS (select sum(credits) from course, department group by credits))
+
+83|const_aggr|SELECT * FROM instructor WHERE EXISTS (SELECT * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name group by credits having sum(credits)<5))
+83|const_aggr|SELECT * FROM instructor WHERE EXISTS (SELECT * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name group by credits having sum(credits)=5))
+83|const_aggr|SELECT * FROM instructor WHERE EXISTS (SELECT * FROM student where EXISTS (select sum(credits) from course, department where course.dept_name = department.dept_name group by credits having sum(credits)!=5))
+83|missing_sq|SELECT * FROM instructor ;
+
+
+=========================IN and NOT IN CONNECTIVE==========================
+64|string|select * from instructor where dept_name in (select dept_name from department where building > 'Watson')
+64|string|select * from instructor where dept_name in (select dept_name from department where building < 'Watson')
+64|sq_connective|select * from instructor where dept_name not in (select dept_name from department where building != 'Watson')
+64|string|select * from instructor where dept_name in (select dept_name from department where building = 'Science')
+64|missing_sq|select * from instructor where dept_name = 'CS'
+
+65|string|select * from instructor where dept_name not in (select dept_name from department where building > 'Watson')
+65|sq_connective|select * from instructor where dept_name in (select dept_name from department where building != 'Watson')
+65|string|select * from instructor where dept_name not in (select dept_name from department where building = 'Watson')
+65|missing_sq|select * from instructor where dept_name = 'CS'
+
+
+66|string|select count(distinct ID) from takes where (course_id , sec_id , semester , year) in (select course_id , sec_id , semester , year from teaches where teaches.ID > '10101')
+66|string|select count(distinct ID) from takes where (course_id , sec_id , semester , year) in (select course_id , sec_id , semester , year from teaches where teaches.ID < '10101')
+66|string|select count(distinct ID) from takes where (course_id , sec_id , semester , year) in (select course_id , sec_id , semester , year from teaches where teaches.ID != '10101')
+66|aggregate|select count(ID) from takes where (course_id , sec_id , semester , year) in (select course_id , sec_id , semester , year from teaches where teaches.ID = '10101')
+66|aggregate|select ID from takes where (course_id , sec_id , semester , year) in (select course_id , sec_id , semester , year from teaches where teaches.ID = '10101')
+66|selection|select count(distinct ID) from takes where (sec_id , semester , year) in (select sec_id , semester , year from teaches where teaches.ID = '10101')
+66|sq_connective|select count(distinct ID) from takes where (course_id , sec_id , semester , year) not in (select course_id , sec_id , semester , year from teaches where teaches.ID = '10101')
+66|missing_sq|select count(distinct ID) from takes ;
+
+67|string|select count(distinct ID) from takes where (course_id , sec_id , semester , year) not in (select course_id , sec_id , semester , year from teaches where teaches.ID < '10101')
+67|string|select count(distinct ID) from takes where (course_id , sec_id , semester , year) not in (select course_id , sec_id , semester , year from teaches where teaches.ID > '10101')
+67|string|select count(distinct ID) from takes where (course_id , sec_id , semester , year) not in (select course_id , sec_id , semester , year from teaches where teaches.ID != '10101')
+67|aggregate|select count(ID) from takes where (course_id , sec_id , semester , year) not in (select course_id , sec_id , semester , year from teaches where teaches.ID = '10101')
+67|aggregate|select ID from takes where (course_id , sec_id , semester , year) not in (select course_id , sec_id , semester , year from teaches where teaches.ID = '10101')
+67|selection|select count(distinct ID) from takes where (course_id , semester , year) not in (select course_id , semester , year from teaches where teaches.ID = '10101')
+67|sq_connective|select count(distinct ID) from takes where (course_id , sec_id , semester , year) in (select course_id , sec_id , semester , year from teaches where teaches.ID = '10101')
+67|missing_sq|select count(distinct ID) from takes ;
+
+80|selection|select course_id from takes where course_id  not in ('1', '3')
+81|sq_connective|select course_id from takes where course_id  not in ('1', '2')
+82|selection|select course_id from takes where course_id  in ('1', (select course_id from teaches where teaches.ID = '10101'))
+82|missing_sq|select course_id from takes where course_id  in ('1', '2')
+82|selection|select course_id from takes where course_id  in (select course_id from teaches where teaches.ID = '10101')
+82|string|select course_id from takes where course_id  in ('1', '2', (select course_id from teaches where teaches.ID = '10111'))
+
+=========================SET OPERATOR QUERIES==========================
+68|set|(select course_id from section where semester = 'Fall' and year != 2009) union (select course_id from section where semester = 'Spring' and year = 2010)
+68|set|(select course_id from section where semester = 'Fall') union (select course_id from section where semester = 'Spring')
+69|set|(select course_id from section where year = 2009) union all (select course_id from section where semester = 'Spring' and year != 2010)
+69|set|(select course_id from section where semester = 'Fall' and year = 2009) union all (select course_id from section where year != 2010)
+70|set|(select course_id from section where semester = 'Fall' and year = 2009) intersect (select course_id from section where semester = 'Spring' and year != 2010)
+70|set|(select course_id from section where semester = 'Fall') intersect (select course_id from section where semester = 'Spring')
+71|set|(select course_id from section where semester = 'Fall' and year != 2009) intersect all (select course_id from section where semester = 'Spring' and year = 2010)
+71|set|(select course_id from section where year != 2009) intersect all (select course_id from section where year = 2010)
+72|set|(select course_id from section where semester = 'Fall' and year = 2009) except (select course_id from section where semester = 'Spring' and year != 2010)
+72|set|(select course_id from section where semester = 'Fall') except (select course_id from section where semester = 'Spring')
+73|set|(select course_id from section where semester = 'Fall' and year != 2009) except all (select course_id from section where semester = 'Spring' and year = 2010)
+73|set|(select course_id from section where year != 2009) except all (select course_id from section where year = 2010)
+
+=========================ORDER BY==========================
+74|order|select name from instructor where dept_name = 'Physics' 
+74|order|select name from instructor where dept_name = 'Physics' order by id
+74|order|select name from instructor where dept_name != 'Physics' order by name
+74|order|select name from instructor where dept_name = 'Physics' order by id, name
+
+
+75|order|select ID from instructor order by salary desc , name asc
+75|order|select ID from instructor order by salary asc , name asc
+75|order|select ID from instructor order by salary desc , name desc
+75|order|select ID from instructor order by salary asc , name desc
+75|order|select ID from instructor order by salary desc 
+75|order|select ID from instructor order by  name asc
+
+76|order|select student.id , name from student,takes where student.id = takes.id and takes.course_id = 'CS-101' and takes.semester = 'Fall' and takes.year = 2009 order by name asc
+76|order|select student.ID, student.name from student, takes where semester = 'Fall' and  year= 2009 and course_id = 'CS-101' and takes.ID = student.ID order by student.name
+76|order|select s.id, s.name from student s, takes t where t.semester = 'Fall' and t.year = 2009 and t.id = s.id and t.course_id = 'CS-101'
+
+
+=========================CASE STATEMENT==========================
+
+77|case|select name FROM instructor
+77|case|select CASE WHEN name = 'c' THEN '0' ELSE 'b' END AS n FROM instructor
+77|case|select CASE WHEN name = 'a' THEN '1' ELSE 'b' END AS n FROM instructor
+77|case|select CASE WHEN name = 'a' THEN '0' ELSE '1' END AS n FROM instructor
+78|cast|select CAST(sum(year) as REAL) FROM teaches
+
+
+Total: 82
