@@ -1,2 +1,0 @@
-7|select dept_name, count(id) from student group by dept_name
-
