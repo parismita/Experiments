@@ -1,69 +1,86 @@
-CREATE TABLE RA (
-    A1 varchar(5) ,
-    B varchar(5) ,
-    primary key (A1)
-);
+create table department
+	(dept_name		varchar(20), 
+	 building		varchar(15), 
+	 budget		        numeric(12,2) check (budget > 0),
+	 primary key (dept_name)
+	);
 
-CREATE TABLE RB (
-    A2 varchar(5) ,
-    B varchar(5) ,
-    primary key (A2) ,
-    foreign key (B) references RA (A1)
+create table instructor
+	(ID			varchar(5), 
+	 name			varchar(20) not null, 
+	 dept_name		varchar(20), 
+	 salary			numeric(8,2) check (salary > 29000),
+	 primary key (ID),
+	 foreign key (dept_name) references department (dept_name)
+		on delete set null
+	);
+create table student
+	(ID			varchar(5), 
+	 name			varchar(20) not null, 
+	 dept_name		varchar(20), 
+	 tot_cred		numeric(3,0) check (tot_cred >= 0),
+	 primary key (ID),
+	 foreign key (dept_name) references department (dept_name)
+		on delete set null
+	);
+	
+create table s
+	(s_ID			varchar(5),
+	 i_ID			varchar(5),
+	 primary key (s_ID),
+	 foreign key (i_ID) references instructor (ID)
+		on delete set null,
+	 foreign key (s_ID) references student (ID)
+		on delete cascade
+	);
 
-);
+create table r
+	(s_ID			varchar(5),
+	 i_ID			varchar(5),
+	 primary key (s_ID),
+	 foreign key (i_ID) references instructor (ID)
+		on delete set null,
+	 foreign key (s_ID) references student (ID)
+		on delete cascade
+	);
 
-CREATE TABLE RC (
-    A3 varchar(5) ,
-    B varchar(5) ,
-    primary key (A3) ,
-    foreign key (B) references RB (A2)
-);
+create table t
+	(s_ID			varchar(5),
+	 i_ID			varchar(5),
+	 primary key (s_ID),
+	 foreign key (i_ID) references instructor (ID)
+		on delete set null,
+	 foreign key (s_ID) references student (ID)
+		on delete cascade
+	);
 
-CREATE TABLE RD (
-    A4 varchar(5) ,
-    B varchar(5) ,
-    primary key (A4) ,
-    foreign key (B) references RC (A3)
-);
 
-CREATE TABLE RE (
-    A5 varchar(5) ,
-    B varchar(5) ,
-    primary key (A5) ,
-    foreign key (B) references RD (A4)
-);
+create table u
+	(s_ID			varchar(5),
+	 i_ID			varchar(5),
+	 primary key (s_ID),
+	 foreign key (i_ID) references instructor (ID)
+		on delete set null,
+	 foreign key (s_ID) references student (ID)
+		on delete cascade
+	);
 
-CREATE TABLE RF (
-    A6 varchar(5) ,
-    B varchar(5) ,
-    primary key (A6) ,
-    foreign key (B) references RE (A5)
-);
+create table v
+	(s_ID			varchar(5),
+	 i_ID			varchar(5),
+	 primary key (s_ID),
+	 foreign key (i_ID) references instructor (ID)
+		on delete set null,
+	 foreign key (s_ID) references student (ID)
+		on delete cascade
+	);
 
-CREATE TABLE RG (
-    A7 varchar(5) ,
-    B varchar(5) ,
-    primary key (A7) ,
-    foreign key (B) references RF (A6)
-);
-
-CREATE TABLE RH (
-    A8 varchar(5) ,
-    B varchar(5) ,
-    primary key (A8) ,
-    foreign key (B) references RG (A7)
-);
-
-CREATE TABLE RI (
-    A9 varchar(5) ,
-    B varchar(5) ,
-    primary key (A9) ,
-    foreign key (B) references RH (A8)
-);
-
-CREATE TABLE RJ (
-    A10 varchar(5) ,
-    B varchar(5) , 
-    primary key (A10) ,
-    foreign key (B) references RI (A9)
-);
+create table w
+	(s_ID			varchar(5),
+	 i_ID			varchar(5),
+	 primary key (s_ID),
+	 foreign key (i_ID) references instructor (ID)
+		on delete set null,
+	 foreign key (s_ID) references student (ID)
+		on delete cascade
+	);

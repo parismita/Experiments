@@ -52,6 +52,8 @@ Note: Currently supported for Linux and Windows
     - Mutants file (.txt). Format to write queries is "queryID|mutantType|mutant". Note mutants corresponding to each queryID are given.
     - This version does not require sample data as input
 
+- Run `python3 execute_query.py` to run a single query. The schema and query paths are to be mentioned at `query_config.cfg`
+
 # Reading Output after running XData
 
 - `/home/xdata/output/<benchmark>-mutant-results.out` file contains output state(Killed/NotKilled/Unsupported) for each mutant-query pair. 

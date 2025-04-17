@@ -1,10 +1,33 @@
-1|join2|SELECT RA.B FROM RA INNER JOIN RB ON (RA.B = RB.A2) group by RA.B having count(RA.B) > 3
-2|join4|SELECT RA.B FROM RA INNER JOIN RB ON (RA.B = RB.A2) INNER JOIN RC ON (RB.B = RC.A3) INNER JOIN RD ON (RC.B = RD.A4) group by RA.B having count(RA.B) > 3
-3|join6|SELECT RA.B FROM RA INNER JOIN RB ON (RA.B = RB.A2) INNER JOIN RC ON (RB.B = RC.A3) INNER JOIN RD ON (RC.B = RD.A4) INNER JOIN RE ON (RD.B = RE.A5) INNER JOIN RF ON (RE.B = RF.A6) group by RA.B having count(RA.B) > 3
-4|join8|SELECT RA.B FROM RA INNER JOIN RB ON (RA.B = RB.A2) INNER JOIN RC ON (RB.B = RC.A3) INNER JOIN RD ON (RC.B = RD.A4) INNER JOIN RE ON (RD.B = RE.A5) INNER JOIN RF ON (RE.B = RF.A6) INNER JOIN RG ON (RF.B = RG.A7) INNER JOIN RH ON (RG.B = RH.A8) group by RA.B having count(RA.B) > 3
-5|join10|SELECT RA.B FROM RA INNER JOIN RB ON (RA.B = RB.A2) INNER JOIN RC ON (RB.B = RC.A3) INNER JOIN RD ON (RC.B = RD.A4) INNER JOIN RE ON (RD.B = RE.A5) INNER JOIN RF ON (RE.B = RF.A6) INNER JOIN RG ON (RF.B = RG.A7) INNER JOIN RH ON (RG.B = RH.A8) INNER JOIN RI ON (RH.B = RI.A9) INNER JOIN RJ ON (RI.B = RJ.A10) group by RA.B having count(RA.B) > 3
-6|cross2|SELECT RA.B FROM RA CROSS JOIN RB group by RA.B having count(RA.B) > 3
-7|cross4|SELECT RA.B FROM RA CROSS JOIN RB CROSS JOIN RC CROSS JOIN RD group by RA.B having count(RA.B) > 3
-8|cross6|SELECT RA.B FROM RA CROSS JOIN RB CROSS JOIN RC CROSS JOIN RD CROSS JOIN RE CROSS JOIN RF group by RA.B having count(RA.B) > 3
-9|cross8|SELECT RA.B FROM RA CROSS JOIN RB CROSS JOIN RC CROSS JOIN RD CROSS JOIN RE CROSS JOIN RF CROSS JOIN RG CROSS JOIN RH group by RA.B having count(RA.B) > 3
-10|cross10|SELECT RA.B FROM RA CROSS JOIN RB CROSS JOIN RC CROSS JOIN RD CROSS JOIN RE CROSS JOIN RF CROSS JOIN RG CROSS JOIN RH CROSS JOIN RI CROSS JOIN RJ group by RA.B having count(RA.B) > 3
+============ 4 TABLE Inner Joins =============================
+1|4tableJ|SELECT * FROM s inner join s q on (s.S_ID=q.S_ID) inner join t on (q.S_ID=t.S_ID) inner join instructor on (t.I_ID=instructor.ID) 
+2|4tableJ|SELECT * FROM s inner join s q on (s.I_ID=q.I_ID) inner join t on (q.I_ID=t.I_ID) inner join instructor on (t.I_ID=instructor.ID) 
+
+============ 5 TABLE Inner Joins =============================
+
+3|5tableJ|SELECT * FROM s inner join s q on (s.S_ID=q.S_ID) inner join s p on (q.S_ID=p.S_ID) inner join u on (p.S_ID=u.S_ID) inner join instructor on (u.I_ID=instructor.ID) 
+4|5tableJ|SELECT * FROM s inner join s q on (s.I_ID=q.S_ID) inner join s p on (q.I_ID=p.S_ID) inner join u on (p.I_ID=u.I_ID) inner join instructor on (u.I_ID=instructor.ID) 
+
+============ 6 TABLE Inner Joins =============================
+
+5|6tableJ|SELECT * FROM s inner join s q on (s.S_ID=q.S_ID) inner join s p on (q.S_ID=p.S_ID) inner join u on (p.S_ID=u.S_ID) inner join v on (u.S_ID=v.S_ID) inner join instructor on (v.I_ID=instructor.ID) 
+6|6tableJ|SELECT * FROM s inner join s q on (s.I_ID=q.S_ID) inner join s p on (q.I_ID=p.S_ID) inner join u on (p.I_ID=u.I_ID) inner join v on (u.I_ID=v.I_ID) inner join instructor on (v.I_ID=instructor.ID) 
+
+============ 7 TABLE JInner JoinsOINS =============================
+7|7tableJ|SELECT * FROM s inner join s q on (s.S_ID=q.S_ID) inner join s p on (q.S_ID=p.S_ID) inner join u on (p.S_ID=u.S_ID) inner join v on (u.S_ID=v.S_ID) inner join w on (v.S_ID=w.S_ID) inner join instructor on (w.I_ID=instructor.ID) 
+8|7tableJ|SELECT * FROM s inner join s q on (s.I_ID=q.S_ID) inner join s p on (q.I_ID=p.S_ID) inner join u on (p.I_ID=u.I_ID) inner join v on (u.I_ID=v.I_ID) inner join w on (v.I_ID=w.I_ID) inner join instructor on (w.I_ID=instructor.ID) 
+
+============ 4 TABLE Cross Joins =============================
+
+9|4tableC|SELECT * FROM s a cross join s b cross join t cross join instructor
+============ 5 TABLE Cross Joins =============================
+
+10|5tableC|SELECT * FROM s a cross join s b cross join s c cross join t cross join instructor
+
+============ 6 TABLE Cross Joins =============================
+
+11|6tablec|SELECT * FROM s a cross join s b cross join s c cross join t cross join v cross join instructor
+
+============ 7 TABLE Cross Joins =============================
+
+12|7tablec|SELECT * FROM s a cross join s b cross join s c cross join t cross join v cross join u cross join instructor
+

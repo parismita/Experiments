@@ -1,10 +1,34 @@
-1|join2|SELECT RA.B FROM RA WHERE 1=2
-2|join4|SELECT RA.B FROM RA WHERE 1=2
-3|join6|SELECT RA.B FROM RA WHERE 1=2
-4|join8|SELECT RA.B FROM RA WHERE 1=2
-5|join10|SELECT RA.B FROM RA WHERE 1=2
-6|cross2|SELECT RA.B FROM RA WHERE 1=2
-7|cross4|SELECT RA.B FROM RA WHERE 1=2
-8|cross6|SELECT RA.B FROM RA WHERE 1=2
-9|cross8|SELECT RA.B FROM RA WHERE 1=2
-10|cross10|SELECT RA.B FROM RA WHERE 1=2
+============ 4 TABLE Inner Joins =============================
+1|4tableJ|SELECT s.S_ID FROM s inner join s q on (s.S_ID=q.S_ID) inner join t on (q.S_ID=t.S_ID) inner join instructor on (t.I_ID=instructor.ID) 
+2|4tableJ|SELECT s.S_ID FROM s inner join s q on (s.I_ID=q.I_ID) inner join t on (q.I_ID=t.I_ID) inner join instructor on (t.I_ID=instructor.ID) 
+
+============ 5 TABLE Inner Joins =============================
+
+3|5tableJ|SELECT s.S_ID FROM s inner join s q on (s.S_ID=q.S_ID) inner join s p on (q.S_ID=p.S_ID) inner join u on (p.S_ID=u.S_ID) inner join instructor on (u.I_ID=instructor.ID) 
+4|5tableJ|SELECT s.S_ID FROM s inner join s q on (s.I_ID=q.S_ID) inner join s p on (q.I_ID=p.S_ID) inner join u on (p.I_ID=u.I_ID) inner join instructor on (u.I_ID=instructor.ID) 
+
+============ 6 TABLE Inner Joins =============================
+
+5|6tableJ|SELECT s.S_ID FROM s inner join s q on (s.S_ID=q.S_ID) inner join s p on (q.S_ID=p.S_ID) inner join u on (p.S_ID=u.S_ID) inner join v on (u.S_ID=v.S_ID) inner join instructor on (v.I_ID=instructor.ID) 
+6|6tableJ|SELECT s.S_ID FROM s inner join s q on (s.I_ID=q.S_ID) inner join s p on (q.I_ID=p.S_ID) inner join u on (p.I_ID=u.I_ID) inner join v on (u.I_ID=v.I_ID) inner join instructor on (v.I_ID=instructor.ID) 
+
+============ 7 TABLE Inner Joins =============================
+7|7tableJ|SELECT s.S_ID FROM s inner join s q on (s.S_ID=q.S_ID) inner join s p on (q.S_ID=p.S_ID) inner join u on (p.S_ID=u.S_ID) inner join v on (u.S_ID=v.S_ID) inner join w on (v.S_ID=w.S_ID) inner join instructor on (w.I_ID=instructor.ID) 
+8|7tableJ|SELECT s.S_ID FROM s inner join s q on (s.I_ID=q.S_ID) inner join s p on (q.I_ID=p.S_ID) inner join u on (p.I_ID=u.I_ID) inner join v on (u.I_ID=v.I_ID) inner join w on (v.I_ID=w.I_ID) inner join instructor on (w.I_ID=instructor.ID) 
+
+============ 4 TABLE Cross Joins =============================
+
+9|4tableC|SELECT s.S_ID FROM s a cross join s b cross join t cross join instructor
+
+============ 5 TABLE Cross Joins =============================
+
+10|5tableC|SELECT s.S_ID FROM s a cross join s b cross join s c cross join t cross join instructor
+
+============ 6 TABLE Cross Joins =============================
+
+11|6tablec|SELECT s.S_ID FROM s a cross join s b cross join s c cross join t cross join v cross join instructor
+
+============ 7 TABLE Cross Joins =============================
+
+12|7tablec|SELECT s.S_ID FROM s a cross join s b cross join s c cross join t cross join v cross join u cross join instructor
+
